@@ -10,6 +10,7 @@ library(httr)
 library(rvest)
 library(shinyBS)
 library(readxl)
+library(ggrepel)
 
 ################################################ 
 ### Translation setup
@@ -27,7 +28,7 @@ i18n$set_translation_language('ქართული')
 ################################################
 
 theme_nn <- function () { 
-  theme_minimal(base_size=12) %+replace% # , base_family="Roboto"
+  theme_minimal(base_size=12) %+replace%
     theme(
       plot.title = element_text(size=15,hjust=0),
       plot.subtitle = element_text(size=9, color="grey40", hjust=0),
@@ -36,28 +37,26 @@ theme_nn <- function () {
       legend.title = element_blank(),
       legend.text = element_text(size=8),
       plot.title.position = "plot",
-      panel.grid.major.y = element_line(color="white", 
-                                        size=.5),
+      panel.grid.major.y = element_line(color="grey40", 
+                                        size=.2),
       panel.grid = element_blank(),
       legend.position = "none", #c(.15,.9),
       legend.direction = "horizontal",
-      plot.background = element_rect(fill="#f0f0f0",
+      plot.background = element_rect(fill=NA,
                                      color=NA),
-      axis.text.x = element_text(size=12,color="black", hjust=0),
-      axis.text.y = element_text(size=12, color="black", hjust=1,vjust=-.5,
-                                 margin = margin(l = 0, 
-                                                 r = -10)) #,family="Calibri")
+      axis.text.x = element_text(size=10,color="black", hjust=1),
+      axis.text.y = element_text(size=10, color="black", hjust=1)
     )
 }
 
 
 
+
 server <- function(input, output, session) {
   observeEvent(input$selected_language, {
-    # This print is just for demonstration
     print(paste("Language change!", input$selected_language))
-    # Here is where we update language in session
     shiny.i18n::update_lang(session, input$selected_language)
+    language <- reactive(input$selected_language)
   })
   
   ################################################ 
@@ -77,21 +76,21 @@ server <- function(input, output, session) {
     detailed <- read.csv("www//data//detailed.csv")%>%mutate(date=lubridate::as_date(date))
     regions <- read.csv("www//data//regions.csv")%>%mutate(date=lubridate::as_date(date))
     hospitalization <- read.csv("www//data//hospitalization.csv")%>%mutate(date=lubridate::as_date(date))
-    
-    
+    owid <- read.csv("www//data//owid.csv")%>%mutate(date=lubridate::as_date(date))
     tracking_r <- read.csv("www//data//tracking_r.csv")%>%mutate(Date=lubridate::as_date(Date))
-    
     stringency <- read.csv("www//data//stringency.csv")
-    
-    
-    ### Facebook humanitarian mobility data
-    
     fb_mov <- read.csv("www/data/fb_mov.csv")%>%mutate(ds=lubridate::as_date(ds))
-    
-    # Google Mobility data
-    # Same here. takes too long
-    
     google_mobility <- read.csv("www/data/gl_mov.csv")%>%mutate(date=lubridate::as_date(date))
+    country <- unique(owid$location)
+    variable <- unique(owid$variable)
+    country_names <- readr::read_csv("www//data//country_names.csv")
+    
+    indicator <- c("total_cases","new_cases","new_cases_smoothed",
+                   "total_deaths", "new_deaths","new_deaths_smoothed",
+                   "total_cases_per_million","new_cases_smoothed_per_million",
+                   "new_cases_per_million","total_deaths_per_million",
+                   "new_deaths_per_million","new_deaths_smoothed_per_million")
+    
     
     ################################################ 
     ### Timestamps
@@ -111,6 +110,62 @@ server <- function(input, output, session) {
       paste0(i18n$t("ბოლო განახლება (თბილისის დროით)"), ": ", format(Sys.time(), "%d/%m/%Y %H:%M:%S", tz = "Asia/Tbilisi"))
     })
     
+    ################################################ 
+    ### Setup for language switcher
+    ################################################
+    
+    
+    ## Country filter is not working.
+	## make sure that necessary variables are grabbed and owd2 data is long and variable names in csv file match that are imported
+    ## This does not recognize unicode. Needs to be checked
+    filtered_country_options <- reactive(
+      country_names %>%
+        filter(language == input$selected_language)
+    )
+    
+    owid2 <- reactive(
+      owid %>%
+        left_join(filtered_country_options(), by=c("location"="country_name"))
+    )
+    
+    georgia_selected <- reactive(
+      ifelse(input$selected_language == "ქართული", "საქართველო",
+             ifelse(input$selected_language == "English", "Georgia", "Грузия"))
+    )
+    
+    output$countries <- renderUI({
+      selectizeInput(
+        "country", options = list(placeholder = 'ქვეყანა'),
+        label = h6("აირჩიეთ ქვეყანა"),
+        selected = georgia_selected(),
+        choices=unique(owid2()$translation), multiple=TRUE)})
+      
+    output$variable <- renderUI({  
+    selectizeInput(
+        "variable", multiple = F,
+        label = h6("აირჩიეთ ინდიკატორი"),
+        choices = indicator)
+    })
+    output$date <- renderUI({  
+      sliderInput("date", "აირჩიეთ თარიღი:",
+                  min = as.Date("2020-03-01"),
+                  max = Sys.Date(),
+                  value = c(as.Date("2020-03-01"), Sys.Date()),
+                  timeFormat = "%d/%m/%Y"
+      )
+      # selectInput("select_countries","აირჩიე ქვეყანა", selected = georgia_selected(),
+      #             choices=unique(owid2()$translation), multiple=TRUE)
+    })
+    
+    dt <- reactive(
+      owid2() %>%
+      #  filter(translation == "საქართველო")
+      # %>%
+          filter(translation %in% input$countries) %>%
+      # #   # dplyr::select(!!input$variable) %>%
+          filter(date >= input$date &
+                   date <= input$date[2])
+    )
     ################################################ 
     ### Section Home: 
     ################################################
@@ -205,7 +260,7 @@ server <- function(input, output, session) {
         slice(1)%>%
         pull(vaccinated)})
     
-    count_innoculated <- renderText({"0"}) # comment this if when at least one case of vaccination is available
+    count_innoculated <- renderText({ifelse(is.na(vaccinated), "0", vaccinated)}) # comment this if when at least one case of vaccination is available
     
     output$new_innoculated <- renderValueBox({
       valueBox(
@@ -280,9 +335,14 @@ server <- function(input, output, session) {
       geom_col_interactive(aes(date, new_cases, tooltip = paste0(date, ": ", new_cases), data_id = new_cases), size=0.4,
                            color=NA, fill = "orange", alpha=0.5)+
       geom_line(aes(date, roll_7), size=1, color="orange")+
-      scale_x_date(date_labels = "%m/%Y")+
+      annotation_custom(
+        grob = grid::rectGrob(gp = grid::gpar(col = NA, fill = "white")),
+        xmin = max(detailed$date)) +
+      scale_x_date(limits=c(as.Date("2020-02-01"),Sys.Date()),
+                   breaks = c(as.Date("2020-03-01"),Sys.Date()),
+                   date_labels = "%d/%m/%Y")+
       theme_nn()
-
+    
     print(daily_cases)
     
     output$daily_cases_chart <- renderGirafe(
@@ -304,7 +364,12 @@ server <- function(input, output, session) {
                                data_id = new_recoveries), size=0.4,
                            color=NA, fill = "darkgreen", alpha=0.5)+
       geom_line(aes(date, roll_7), size=1, color="darkgreen")+
-      scale_x_date(date_labels = "%m/%Y")+
+      annotation_custom(
+        grob = grid::rectGrob(gp = grid::gpar(col = NA, fill = "white")),
+        xmin = max(detailed$date)) +
+      scale_x_date(limits=c(as.Date("2020-02-01"),Sys.Date()),
+                   breaks = c(as.Date("2020-03-01"),Sys.Date()),
+                   date_labels = "%d/%m/%Y")+
       theme_nn()
     
     print(recov_ts)
@@ -326,7 +391,12 @@ server <- function(input, output, session) {
                                data_id = new_deaths), size=0.4,
                            color=NA, fill = "red", alpha=0.5)+
       geom_line(aes(date, roll_7), size=1, color="red")+
-      scale_x_date(date_labels = "%m/%Y")+
+      annotation_custom(
+        grob = grid::rectGrob(gp = grid::gpar(col = NA, fill = "white")),
+        xmin = max(detailed$date)) +
+      scale_x_date(limits=c(as.Date("2020-02-01"),Sys.Date()),
+                   breaks = c(as.Date("2020-03-01"),Sys.Date()),
+                   date_labels = "%d/%m/%Y")+
       theme_nn()
     
     print(deaths_ts)
@@ -348,7 +418,12 @@ server <- function(input, output, session) {
                                data_id = total_daily_tests), size=0.4,
                            color=NA, fill = "#808000", alpha=0.5)+
       geom_line(aes(date, roll_7), size=1, color="#808000")+
-      scale_x_date(date_labels = "%m/%Y")+
+      annotation_custom(
+        grob = grid::rectGrob(gp = grid::gpar(col = NA, fill = "white")),
+        xmin = max(detailed$date)) +
+      scale_x_date(limits=c(as.Date("2020-02-01"),Sys.Date()),
+                   breaks = c(as.Date("2020-03-01"),Sys.Date()),
+                   date_labels = "%d/%m/%Y")+
       scale_y_continuous(label=comma)+
       theme_nn()
     
@@ -445,8 +520,6 @@ server <- function(input, output, session) {
     ### Section Total: 
     ################################################
     
-    ### Cumulative outputs
-    
     output$cumulative_cases <- renderValueBox({
       valueBox(
         paste0(count_total_cases()), i18n$t("დადასტურებული შემთხვევა"), icon = icon("virus"),
@@ -529,7 +602,12 @@ server <- function(input, output, session) {
                                data_id = total), size=0.4,
                            color=NA, fill = "orange", alpha=0.5)+
       geom_line(aes(date, roll_7), size=1, color="orange")+
-      scale_x_date(date_labels = "%m/%Y")+
+      annotation_custom(
+        grob = grid::rectGrob(gp = grid::gpar(col = NA, fill = "white")),
+        xmin = max(detailed$date)) +
+      scale_x_date(limits=c(as.Date("2020-02-01"),Sys.Date()),
+                   breaks = c(as.Date("2020-03-01"),Sys.Date()),
+                   date_labels = "%d/%m/%Y")+
       scale_y_continuous(label=comma)+
       theme_nn()
     
@@ -552,7 +630,12 @@ server <- function(input, output, session) {
                                data_id = total_rec), size=0.4,
                            color=NA, fill = "darkgreen", alpha=0.5)+
       geom_line(aes(date, roll_7), size=1, color="darkgreen")+
-      scale_x_date(date_labels = "%m/%Y")+
+      annotation_custom(
+        grob = grid::rectGrob(gp = grid::gpar(col = NA, fill = "white")),
+        xmin = max(detailed$date)) +
+      scale_x_date(limits=c(as.Date("2020-02-01"),Sys.Date()),
+                   breaks = c(as.Date("2020-03-01"),Sys.Date()),
+                   date_labels = "%d/%m/%Y")+
       scale_y_continuous(label=comma)+
       theme_nn()
     
@@ -575,7 +658,12 @@ server <- function(input, output, session) {
                                data_id = total_deaths), size=0.4,
                            color=NA, fill = "red", alpha=0.5)+
       geom_line(aes(date, roll_7), size=1, color="red")+
-      scale_x_date(date_labels = "%m/%Y")+
+      annotation_custom(
+        grob = grid::rectGrob(gp = grid::gpar(col = NA, fill = "white")),
+        xmin = max(detailed$date)) +
+      scale_x_date(limits=c(as.Date("2020-02-01"),Sys.Date()),
+                   breaks = c(as.Date("2020-03-01"),Sys.Date()),
+                   date_labels = "%d/%m/%Y")+
       theme_nn()
     
     print(tot_cumulative_died)
@@ -596,7 +684,12 @@ server <- function(input, output, session) {
                                data_id = total_test), size=0.4,
                            color=NA, fill = "#808000", alpha=0.5)+
       geom_line(aes(date, roll_7), size=1, color="#808000")+
-      scale_x_date(date_labels = "%m/%Y")+
+      annotation_custom(
+        grob = grid::rectGrob(gp = grid::gpar(col = NA, fill = "white")),
+        xmin = max(detailed$date)) +
+      scale_x_date(limits=c(as.Date("2020-02-01"),Sys.Date()),
+                   breaks = c(as.Date("2020-03-01"),Sys.Date()),
+                   date_labels = "%d/%m/%Y")+
       scale_y_continuous(label=comma)+
       theme_nn()
     
@@ -623,7 +716,12 @@ server <- function(input, output, session) {
                                data_id = total_positive_share), size=0.4,
                            color=NA, fill = "#808000", alpha=0.5)+
       geom_line(aes(date, roll_7), size=1, color="#808000")+
-      scale_x_date(date_labels = "%m/%Y")+
+      annotation_custom(
+        grob = grid::rectGrob(gp = grid::gpar(col = NA, fill = "white")),
+        xmin = max(detailed$date)) +
+      scale_x_date(limits=c(as.Date("2020-02-01"),Sys.Date()),
+                   breaks = c(as.Date("2020-03-01"),Sys.Date()),
+                   date_labels = "%d/%m/%Y")+
       theme_nn()
     
     print(tot_positive_ratio)
@@ -645,7 +743,12 @@ server <- function(input, output, session) {
                                data_id = daily_PCR_tests), size=0.4,
                            color=NA, fill = "#808000", alpha=0.5)+
       geom_line(aes(date, roll_7), size=1, color="#808000")+
-      scale_x_date(date_labels = "%m/%Y")+
+      annotation_custom(
+        grob = grid::rectGrob(gp = grid::gpar(col = NA, fill = "white")),
+        xmin = max(detailed$date)) +
+      scale_x_date(limits=c(as.Date("2020-02-01"),Sys.Date()),
+                   breaks = c(as.Date("2020-03-01"),Sys.Date()),
+                   date_labels = "%d/%m/%Y")+
       scale_y_continuous(label=comma)+
       theme_nn()
     
@@ -668,7 +771,12 @@ server <- function(input, output, session) {
                                data_id = daily_rapid_test), size=0.4,
                            color=NA, fill = "#808000", alpha=0.5)+
       geom_line(aes(date, roll_7), size=1, color="#808000")+
-      scale_x_date(date_labels = "%m/%Y")+
+      annotation_custom(
+        grob = grid::rectGrob(gp = grid::gpar(col = NA, fill = "white")),
+        xmin = max(detailed$date)) +
+      scale_x_date(limits=c(as.Date("2020-02-01"),Sys.Date()),
+                   breaks = c(as.Date("2020-03-01"),Sys.Date()),
+                   date_labels = "%d/%m/%Y")+
       scale_y_continuous(label=comma)+
       theme_nn()
     
@@ -694,7 +802,12 @@ server <- function(input, output, session) {
                                data_id = total_hospitalized), size=0.4,
                            color=NA, fill = "blue", alpha=0.5)+
       geom_line(aes(date, roll_7), size=1, color="blue")+
-      scale_x_date(date_labels = "%m/%Y")+
+      annotation_custom(
+        grob = grid::rectGrob(gp = grid::gpar(col = NA, fill = "white")),
+        xmin = max(detailed$date)) +
+      scale_x_date(limits=c(as.Date("2020-02-01"),Sys.Date()),
+                   breaks = c(as.Date("2020-03-01"),Sys.Date()),
+                   date_labels = "%d/%m/%Y")+
       theme_nn()
     
     print(cumul_hospitalized)
@@ -716,7 +829,12 @@ server <- function(input, output, session) {
                                data_id = hospitalized_per_100k), size=0.4,
                            color=NA, fill = "blue", alpha=0.5)+
       geom_line(aes(date, roll_7), size=1, color="blue")+
-      scale_x_date(date_labels = "%m/%Y")+
+      annotation_custom(
+        grob = grid::rectGrob(gp = grid::gpar(col = NA, fill = "white")),
+        xmin = max(detailed$date)) +
+      scale_x_date(limits=c(as.Date("2020-02-01"),Sys.Date()),
+                   breaks = c(as.Date("2020-03-01"),Sys.Date()),
+                   date_labels = "%d/%m/%Y")+
       theme_nn()
     
     print(thous_hospitalized)
@@ -738,7 +856,12 @@ server <- function(input, output, session) {
                                data_id = critical_patients), size=0.4,
                            color=NA, fill = "blue", alpha=0.5)+
       geom_line(aes(date, roll_7), size=1, color="blue")+
-      scale_x_date(date_labels = "%m/%Y")+
+      annotation_custom(
+        grob = grid::rectGrob(gp = grid::gpar(col = NA, fill = "white")),
+        xmin = max(detailed$date)) +
+      scale_x_date(limits=c(as.Date("2020-02-01"),Sys.Date()),
+                   breaks = c(as.Date("2020-03-01"),Sys.Date()),
+                   date_labels = "%d/%m/%Y")+
       theme_nn()
     
     print(critical)
@@ -754,13 +877,18 @@ server <- function(input, output, session) {
     
     ventil  <- 
       hospitalization %>%
-      mutate(roll_7= rollmean(on_ventilator, 7, align = "right", fill = NA))%>%
+      mutate(roll_7= rollmean(on_ventilator, 7, align = "right", fill = T))%>%
       ggplot()+
       geom_col_interactive(aes(date, on_ventilator, tooltip = paste0(date, ": ", round(on_ventilator, 0)),
                                data_id = on_ventilator), size=0.4,
                            color=NA, fill = "blue", alpha=0.5)+
       geom_line(aes(date, roll_7), size=1, color="blue")+
-      scale_x_date(date_labels = "%m/%Y")+
+      annotation_custom(
+        grob = grid::rectGrob(gp = grid::gpar(col = NA, fill = "white")),
+        xmin = max(detailed$date)) +
+      scale_x_date(limits=c(as.Date("2020-02-01"),Sys.Date()),
+                   breaks = c(as.Date("2020-03-01"),Sys.Date()),
+                   date_labels = "%d/%m/%Y")+
       theme_nn()
     
     print(ventil)
@@ -785,8 +913,12 @@ server <- function(input, output, session) {
       geom_col_interactive(aes(date, R, tooltip = paste0(date, ": ", round(R, 2)),
                                data_id = R), size=0.4,
                            color=NA, fill = "red", alpha=0.2)+
-      geom_hline(yintercept = 1, color="grey")+
-      scale_x_date(date_labels = "%m/%Y")+
+      geom_hline(yintercept = 1, color="grey")+annotation_custom(
+        grob = grid::rectGrob(gp = grid::gpar(col = NA, fill = "white")),
+        xmin = max(detailed$date)) +
+      scale_x_date(limits=c(as.Date("2020-02-01"),Sys.Date()),
+                   breaks = c(as.Date("2020-03-01"),Sys.Date()),
+                   date_labels = "%d/%m/%Y")+
       theme_nn()
     
     print(tracking_r_rate)
@@ -814,7 +946,12 @@ server <- function(input, output, session) {
                            color=NA, fill = "darkblue", alpha=0.2)+
       geom_line(aes(date, StringencyIndexForDisplay), size=1, color="darkblue")+
       geom_hline(yintercept = 1, color="grey")+
-      scale_x_date(date_labels = "%m/%Y")+
+      annotation_custom(
+        grob = grid::rectGrob(gp = grid::gpar(col = NA, fill = "white")),
+        xmin = max(detailed$date)) +
+      scale_x_date(limits=c(as.Date("2020-02-01"),Sys.Date()),
+                   breaks = c(as.Date("2020-03-01"),Sys.Date()),
+                   date_labels = "%d/%m/%Y")+
       theme_nn()
     
     print(tracking_stringency)
@@ -841,7 +978,12 @@ server <- function(input, output, session) {
                            color=NA, fill = "darkred", alpha=0.2, position="identity")+
       scale_y_continuous(labels = function(x) paste0(x, "%"))+
       geom_path(aes(date, average), col="darkred", size=1)+
-      scale_x_date(date_labels = "%m/%y")+
+      annotation_custom(
+        grob = grid::rectGrob(gp = grid::gpar(col = NA, fill = "white")),
+        xmin = max(detailed$date)) +
+      scale_x_date(limits=c(as.Date("2020-02-01"),Sys.Date()),
+                   breaks = c(as.Date("2020-03-01"),Sys.Date()),
+                   date_labels = "%d/%m/%Y")+
       ylim(-100, 50)+
       theme_nn()
     
@@ -864,7 +1006,12 @@ server <- function(input, output, session) {
                            color=NA, fill = "darkred", alpha=0.2, position="identity")+
       scale_y_continuous(labels = function(x) paste0(x, "%"))+
       geom_path(aes(date, average), col="darkred", size=1)+
-      scale_x_date(date_labels = "%m/%y")+
+      annotation_custom(
+        grob = grid::rectGrob(gp = grid::gpar(col = NA, fill = "white")),
+        xmin = max(detailed$date)) +
+      scale_x_date(limits=c(as.Date("2020-02-01"),Sys.Date()),
+                   breaks = c(as.Date("2020-03-01"),Sys.Date()),
+                   date_labels = "%d/%m/%Y")+
       ylim(-100, 50)+
       theme_nn()
     
@@ -887,7 +1034,12 @@ server <- function(input, output, session) {
                            color=NA, fill = "darkred", alpha=0.2, position="identity")+
       scale_y_continuous(labels = function(x) paste0(x, "%"))+
       geom_path(aes(date, average), col="darkred", size=1)+
-      scale_x_date(date_labels = "%m/%y")+
+      annotation_custom(
+        grob = grid::rectGrob(gp = grid::gpar(col = NA, fill = "white")),
+        xmin = max(detailed$date)) +
+      scale_x_date(limits=c(as.Date("2020-02-01"),Sys.Date()),
+                   breaks = c(as.Date("2020-03-01"),Sys.Date()),
+                   date_labels = "%d/%m/%Y")+
       ylim(-100, 50)+
       theme_nn()
     
@@ -910,7 +1062,12 @@ server <- function(input, output, session) {
                            color=NA, fill = "darkred", alpha=0.2, position="identity")+
       scale_y_continuous(labels = function(x) paste0(x, "%"))+
       geom_path(aes(date, average), col="darkred", size=1)+
-      scale_x_date(date_labels = "%m/%y")+
+      annotation_custom(
+        grob = grid::rectGrob(gp = grid::gpar(col = NA, fill = "white")),
+        xmin = max(detailed$date)) +
+      scale_x_date(limits=c(as.Date("2020-02-01"),Sys.Date()),
+                   breaks = c(as.Date("2020-03-01"),Sys.Date()),
+                   date_labels = "%d/%m/%Y")+
       ylim(-100, 50)+
       theme_nn()
     
@@ -933,7 +1090,12 @@ server <- function(input, output, session) {
                            color=NA, fill = "darkred", alpha=0.2, position="identity")+
       scale_y_continuous(labels = function(x) paste0(x, "%"))+
       geom_path(aes(date, average), col="darkred", size=1)+
-      scale_x_date(date_labels = "%m/%y")+
+      annotation_custom(
+        grob = grid::rectGrob(gp = grid::gpar(col = NA, fill = "white")),
+        xmin = max(detailed$date)) +
+      scale_x_date(limits=c(as.Date("2020-02-01"),Sys.Date()),
+                   breaks = c(as.Date("2020-03-01"),Sys.Date()),
+                   date_labels = "%d/%m/%Y")+
       ylim(-100, 50)+
       theme_nn()
     
@@ -987,7 +1149,12 @@ server <- function(input, output, session) {
                            color=NA, fill = "darkgreen", alpha=0.2)+
       
       scale_y_continuous(labels = function(x) paste0(x*100, "%"))+
-      scale_x_date(date_labels = "%m/%Y")+
+      annotation_custom(
+        grob = grid::rectGrob(gp = grid::gpar(col = NA, fill = "white")),
+        xmin = max(detailed$date)) +
+      scale_x_date(limits=c(as.Date("2020-02-01"),Sys.Date()),
+                   breaks = c(as.Date("2020-03-01"),Sys.Date()),
+                   date_labels = "%d/%m/%Y")+
       ylim(-1, 0.5)+
       theme_nn()
     
@@ -1016,7 +1183,12 @@ server <- function(input, output, session) {
                            color=NA, fill = "darkgreen", alpha=0.2)+
       
       scale_y_continuous(labels = function(x) paste0(x*100, "%"))+
-      scale_x_date(date_labels = "%m/%Y")+
+      annotation_custom(
+        grob = grid::rectGrob(gp = grid::gpar(col = NA, fill = "white")),
+        xmin = max(detailed$date)) +
+      scale_x_date(limits=c(as.Date("2020-02-01"),Sys.Date()),
+                   breaks = c(as.Date("2020-03-01"),Sys.Date()),
+                   date_labels = "%d/%m/%Y")+
       ylim(-1, 0.5)+
       theme_nn()
     
@@ -1043,9 +1215,13 @@ server <- function(input, output, session) {
       geom_col_interactive(aes(date, average, tooltip = paste0(date, ": ", round(average, 2)),
                                data_id = average), size=0.4,
                            color=NA, fill = "darkgreen", alpha=0.2)+
-      
       scale_y_continuous(labels = function(x) paste0(x*100, "%"))+
-      scale_x_date(date_labels = "%m/%Y")+
+      annotation_custom(
+        grob = grid::rectGrob(gp = grid::gpar(col = NA, fill = "white")),
+        xmin = max(detailed$date)) +
+      scale_x_date(limits=c(as.Date("2020-02-01"),Sys.Date()),
+                   breaks = c(as.Date("2020-03-01"),Sys.Date()),
+                   date_labels = "%d/%m/%Y")+
       ylim(-1, 0.5)+
       theme_nn()
     
@@ -1066,5 +1242,84 @@ server <- function(input, output, session) {
                                                  size = "default"),
                                         i18n$t("Google-ის მობილობის მონაცემები გვიჩვენებს, წინა კვირასთან შედარებით, გაიზარდა თუ შემცირდა ამა თუ იმ კონკრეტული დანიშნულებით გადაადგილება"))})
     
-  })
+    output$plot <- renderTable(owid2())
+    })
+  
+  ##### Comparative plots
+  
+  # output$plot <- renderPlot({
+  #   ggplot(dt(),
+  #          geom_line(aes(x=date, y=!!input$variable, color=location, group=location)))
+  # })
+  
+  
+  
+  #creating ggiraph plot for main panel
+
+    # girafe(ggobj = ggplot(dt())+
+    #          geom_line_interactive(aes(x=date,y=!!input$variable,
+    #                                    color=location, group=location,
+    #                                    tooltip=paste0(date,": \n", location, ": ",!!input$variable),
+    #                                    data_id=!!input$variable),
+    #                                size=.7)+
+    #          annotation_custom(
+    #            grob = grid::rectGrob(gp = grid::gpar(col = NA, fill = "white")),
+    #            xmin = max(owid$date)) +
+    #          geom_text_repel(data=dt() %>%
+    #                            group_by(location)%>%
+    #                            arrange(desc(date))%>%
+    #                            slice(1),
+    #                          (aes(x=date, y=data,
+    #                               label = gsub("^.*$", " ", location))),
+    #                          segment.curvature = -0.1,
+    #                          segment.square = TRUE,
+    #                          segment.color = 'grey',
+    #                          box.padding = 0.1,
+    #                          point.padding = 0.6,
+    #                          nudge_x = 0.15,
+    #                          nudge_y = 1,
+    #                          force = 0.5,
+    #                          hjust = 0,
+    #                          direction="y",
+    #                          na.rm = TRUE, 
+    #                          xlim = as.Date(c(Sys.Date(),#can I set today? Sys.Date()?
+    #                                           (Sys.Date() %m+% months (2))))
+    #          ) +
+    #          geom_text_repel(data = dt() %>% 
+    #                            filter(!is.na(location))%>%
+    #                            group_by(location)%>%
+    #                            arrange(desc(date))%>%
+    #                            slice(1),
+    #                          aes(date,data,color=location,
+    #                              label = paste0("  ", location)),
+    #                          segment.alpha = 0, ## This will 'hide' the link
+    #                          segment.curvature = -0.1,
+    #                          segment.square = TRUE,
+    #                          segment.color = 'grey',
+    #                          box.padding = 0.1,
+    #                          point.padding = 0.6,
+    #                          nudge_x = 0.15,
+    #                          nudge_y = 1,
+    #                          force = 0.5,
+    #                          hjust = 0,
+    #                          direction="y",
+    #                          na.rm = TRUE, 
+    #                          size=2.8,
+    #                          xlim = as.Date(c(Sys.Date(),#can I set today? Sys.Date()?
+    #                                           (Sys.Date() %m+% months (2)))),
+    #                          ylim = c(0,NA))+
+    #          coord_cartesian(clip = 'off') +
+    #          scale_x_date(limits=c(input$date,Sys.Date()),
+    #                       breaks = c(input$date,Sys.Date()),
+    #                       date_labels = "%d/%m/%Y",
+    #                       expand=c(0.1,0.1))+
+    #          scale_y_continuous(labels=comma) +
+    #          scale_color_brewer(palette = "Dark2") + theme_nn()
+    # )
+
+  
+  
+  
+  
+  
 } ### This ends server part

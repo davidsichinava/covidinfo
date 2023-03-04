@@ -16,12 +16,30 @@ detailed <- read_excel("www//data//src.xlsx", "detailed")
 regions <- read_excel("www//data//src.xlsx", "regions")
 hospitalization <- read_excel("www//data//src.xlsx", "hospitalization")
 occupied_territories <- read_excel("www//data//src.xlsx", "occupied_territories")
+owid <-readr::read_csv("https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/owid-covid-data.csv")
+regional_data <- read_excel("www//data//src.xlsx", "reg-pop")
 
 total <- write.csv(total, "www//data//total.csv", row.names = F)
 detailed <- write.csv(detailed, "www//data//detailed.csv", row.names = F)
 regions <- write.csv(regions, "www//data//regions.csv", row.names = F)
-occupied_territories <- write.csv(hospitalization, "www//data//occupied_territories.csv", row.names = F)
+occupied_territories <- write.csv(occupied_territories, "www//data//occupied_territories.csv", row.names = F)
+regional_data <- write.csv(regional_data, "www//data//reg-pop.csv", row.names = F)
 
+owid <- read.csv("www//data//owid.csv")%>%
+  mutate(date=lubridate::as_date(date))%>%
+  tidyr::gather(variable,data,total_cases,new_cases,new_cases_smoothed,
+                total_deaths, new_deaths,new_deaths_smoothed,
+                total_cases_per_million,new_cases_smoothed_per_million,
+                new_cases_per_million,total_deaths_per_million,
+                new_deaths_per_million,new_deaths_smoothed_per_million,
+                stringency_index,new_vaccinations_smoothed_per_million,
+                people_fully_vaccinated_per_hundred,people_vaccinated_per_hundred,
+                new_vaccinations_smoothed,total_vaccinations,people_vaccinated,
+                people_fully_vaccinated)%>%
+  select(date,location,data,variable)
+
+country <- unique(owid$location)
+variable <- unique(owid$variable)
 
 ### Facebook humanitarian mobility data
 

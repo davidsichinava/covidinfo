@@ -1,0 +1,600 @@
+"date","region","new_cases","total"
+2020-05-05,"Abkhazia",0,3
+2020-05-05,"Tskhinvali Region",0,0
+2020-05-06,"Abkhazia",3,3
+2020-05-06,"Tskhinvali Region",4,4
+2020-05-07,"Abkhazia",0,3
+2020-05-07,"Tskhinvali Region",8,11
+2020-05-08,"Abkhazia",4,7
+2020-05-08,"Tskhinvali Region",4,15
+2020-05-09,"Abkhazia",2,9
+2020-05-09,"Tskhinvali Region",2,18
+2020-05-10,"Abkhazia",0,9
+2020-05-10,"Tskhinvali Region",5,22
+2020-05-11,"Abkhazia",1,10
+2020-05-11,"Tskhinvali Region",1,23
+2020-05-12,"Abkhazia",3,13
+2020-05-12,"Tskhinvali Region",0,23
+2020-05-13,"Abkhazia",2,15
+2020-05-13,"Tskhinvali Region",12,25
+2020-05-14,"Abkhazia",2,17
+2020-05-14,"Tskhinvali Region",5,30
+2020-05-15,"Abkhazia",0,17
+2020-05-15,"Tskhinvali Region",0,30
+2020-05-16,"Abkhazia",0,17
+2020-05-16,"Tskhinvali Region",4,34
+2020-05-17,"Abkhazia",3,20
+2020-05-17,"Tskhinvali Region",0,34
+2020-05-18,"Abkhazia",0,20
+2020-05-18,"Tskhinvali Region",0,34
+2020-05-19,"Abkhazia",4,24
+2020-05-19,"Tskhinvali Region",0,34
+2020-05-20,"Abkhazia",1,25
+2020-05-20,"Tskhinvali Region",0,34
+2020-05-21,"Abkhazia",0,25
+2020-05-21,"Tskhinvali Region",0,34
+2020-05-22,"Abkhazia",3,28
+2020-05-22,"Tskhinvali Region",0,34
+2020-05-23,"Abkhazia",0,28
+2020-05-23,"Tskhinvali Region",1,35
+2020-05-24,"Abkhazia",0,28
+2020-05-24,"Tskhinvali Region",2,37
+2020-05-25,"Abkhazia",0,28
+2020-05-25,"Tskhinvali Region",0,37
+2020-05-26,"Abkhazia",0,28
+2020-05-26,"Tskhinvali Region",0,37
+2020-05-27,"Abkhazia",0,28
+2020-05-27,"Tskhinvali Region",0,37
+2020-05-28,"Abkhazia",0,28
+2020-05-28,"Tskhinvali Region",0,37
+2020-05-29,"Abkhazia",0,28
+2020-05-29,"Tskhinvali Region",1,38
+2020-05-30,"Abkhazia",0,28
+2020-05-30,"Tskhinvali Region",1,39
+2020-05-31,"Abkhazia",0,28
+2020-05-31,"Tskhinvali Region",0,39
+2020-06-01,"Abkhazia",0,28
+2020-06-01,"Tskhinvali Region",3,42
+2020-06-02,"Abkhazia",0,28
+2020-06-02,"Tskhinvali Region",0,42
+2020-06-03,"Abkhazia",7,35
+2020-06-03,"Tskhinvali Region",3,45
+2020-06-04,"Abkhazia",0,35
+2020-06-04,"Tskhinvali Region",0,45
+2020-06-05,"Abkhazia",0,35
+2020-06-05,"Tskhinvali Region",0,45
+2020-06-06,"Abkhazia",1,36
+2020-06-06,"Tskhinvali Region",12,57
+2020-06-07,"Abkhazia",0,36
+2020-06-07,"Tskhinvali Region",0,66
+2020-06-08,"Abkhazia",0,36
+2020-06-08,"Tskhinvali Region",0,66
+2020-06-09,"Abkhazia",0,36
+2020-06-09,"Tskhinvali Region",2,68
+2020-06-10,"Abkhazia",0,36
+2020-06-10,"Tskhinvali Region",0,68
+2020-06-11,"Abkhazia",0,36
+2020-06-11,"Tskhinvali Region",4,72
+2020-06-12,"Abkhazia",1,37
+2020-06-12,"Tskhinvali Region",0,72
+2020-06-13,"Abkhazia",0,37
+2020-06-13,"Tskhinvali Region",4,76
+2020-06-14,"Abkhazia",0,37
+2020-06-14,"Tskhinvali Region",0,76
+2020-06-15,"Abkhazia",1,38
+2020-06-15,"Tskhinvali Region",2,78
+2020-06-16,"Abkhazia",0,38
+2020-06-16,"Tskhinvali Region",0,78
+2020-06-17,"Abkhazia",0,38
+2020-06-17,"Tskhinvali Region",2,80
+2020-06-18,"Abkhazia",0,38
+2020-06-18,"Tskhinvali Region",0,84
+2020-06-19,"Abkhazia",0,38
+2020-06-19,"Tskhinvali Region",0,84
+2020-06-20,"Abkhazia",0,38
+2020-06-20,"Tskhinvali Region",0,84
+2020-06-21,"Abkhazia",0,38
+2020-06-21,"Tskhinvali Region",0,84
+2020-06-22,"Abkhazia",0,38
+2020-06-22,"Tskhinvali Region",0,84
+2020-06-23,"Abkhazia",0,38
+2020-06-23,"Tskhinvali Region",1,84
+2020-06-24,"Abkhazia",0,38
+2020-06-24,"Tskhinvali Region",1,85
+2020-06-25,"Abkhazia",0,38
+2020-06-25,"Tskhinvali Region",0,85
+2020-06-26,"Abkhazia",0,38
+2020-06-26,"Tskhinvali Region",0,85
+2020-06-27,"Abkhazia",0,38
+2020-06-27,"Tskhinvali Region",0,85
+2020-06-28,"Abkhazia",0,38
+2020-06-28,"Tskhinvali Region",0,85
+2020-06-29,"Abkhazia",0,38
+2020-06-29,"Tskhinvali Region",0,85
+2020-06-30,"Abkhazia",0,38
+2020-06-30,"Tskhinvali Region",0,85
+2020-07-01,"Abkhazia",0,38
+2020-07-01,"Tskhinvali Region",0,85
+2020-07-02,"Abkhazia",0,38
+2020-07-02,"Tskhinvali Region",2,87
+2020-07-03,"Abkhazia",0,38
+2020-07-03,"Tskhinvali Region",0,87
+2020-07-04,"Abkhazia",0,38
+2020-07-04,"Tskhinvali Region",0,87
+2020-07-05,"Abkhazia",0,38
+2020-07-05,"Tskhinvali Region",0,87
+2020-07-06,"Abkhazia",0,38
+2020-07-06,"Tskhinvali Region",0,87
+2020-07-07,"Abkhazia",0,38
+2020-07-07,"Tskhinvali Region",0,87
+2020-07-08,"Abkhazia",0,38
+2020-07-08,"Tskhinvali Region",0,87
+2020-07-09,"Abkhazia",0,38
+2020-07-09,"Tskhinvali Region",0,87
+2020-07-10,"Abkhazia",0,38
+2020-07-10,"Tskhinvali Region",2,87
+2020-07-11,"Abkhazia",0,38
+2020-07-11,"Tskhinvali Region",0,89
+2020-07-12,"Abkhazia",0,38
+2020-07-12,"Tskhinvali Region",0,89
+2020-07-13,"Abkhazia",0,38
+2020-07-13,"Tskhinvali Region",0,89
+2020-07-14,"Abkhazia",0,38
+2020-07-14,"Tskhinvali Region",0,89
+2020-07-15,"Abkhazia",0,38
+2020-07-15,"Tskhinvali Region",0,89
+2020-07-16,"Abkhazia",0,38
+2020-07-16,"Tskhinvali Region",0,89
+2020-07-17,"Abkhazia",0,38
+2020-07-17,"Tskhinvali Region",2,89
+2020-07-18,"Abkhazia",0,38
+2020-07-18,"Tskhinvali Region",0,89
+2020-07-19,"Abkhazia",0,38
+2020-07-19,"Tskhinvali Region",0,89
+2020-07-20,"Abkhazia",0,38
+2020-07-20,"Tskhinvali Region",0,89
+2020-07-21,"Abkhazia",0,38
+2020-07-21,"Tskhinvali Region",0,89
+2020-07-22,"Abkhazia",2,40
+2020-07-22,"Tskhinvali Region",0,89
+2020-07-23,"Abkhazia",5,45
+2020-07-23,"Tskhinvali Region",0,89
+2020-07-24,"Abkhazia",3,48
+2020-07-24,"Tskhinvali Region",0,89
+2020-07-25,"Abkhazia",7,55
+2020-07-25,"Tskhinvali Region",0,89
+2020-07-26,"Abkhazia",0,55
+2020-07-26,"Tskhinvali Region",0,89
+2020-07-27,"Abkhazia",2,57
+2020-07-27,"Tskhinvali Region",0,89
+2020-07-28,"Abkhazia",6,63
+2020-07-28,"Tskhinvali Region",0,89
+2020-07-29,"Abkhazia",8,71
+2020-07-29,"Tskhinvali Region",0,89
+2020-07-30,"Abkhazia",10,81
+2020-07-30,"Tskhinvali Region",0,89
+2020-07-31,"Abkhazia",3,84
+2020-07-31,"Tskhinvali Region",0,89
+2020-08-01,"Abkhazia",14,123
+2020-08-01,"Tskhinvali Region",0,89
+2020-08-02,"Abkhazia",0,123
+2020-08-02,"Tskhinvali Region",0,89
+2020-08-03,"Abkhazia",0,123
+2020-08-03,"Tskhinvali Region",0,89
+2020-08-04,"Abkhazia",9,132
+2020-08-04,"Tskhinvali Region",0,89
+2020-08-05,"Abkhazia",0,132
+2020-08-05,"Tskhinvali Region",0,89
+2020-08-06,"Abkhazia",0,132
+2020-08-06,"Tskhinvali Region",0,89
+2020-08-07,"Abkhazia",6,138
+2020-08-07,"Tskhinvali Region",0,89
+2020-08-08,"Abkhazia",9,147
+2020-08-08,"Tskhinvali Region",0,89
+2020-08-09,"Abkhazia",0,147
+2020-08-09,"Tskhinvali Region",0,89
+2020-08-10,"Abkhazia",9,156
+2020-08-10,"Tskhinvali Region",0,89
+2020-08-11,"Abkhazia",5,161
+2020-08-11,"Tskhinvali Region",0,89
+2020-08-12,"Abkhazia",0,161
+2020-08-12,"Tskhinvali Region",0,89
+2020-08-13,"Abkhazia",0,161
+2020-08-13,"Tskhinvali Region",0,89
+2020-08-14,"Abkhazia",26,187
+2020-08-14,"Tskhinvali Region",0,89
+2020-08-15,"Abkhazia",0,187
+2020-08-15,"Tskhinvali Region",0,89
+2020-08-16,"Abkhazia",7,194
+2020-08-16,"Tskhinvali Region",0,89
+2020-08-17,"Abkhazia",8,202
+2020-08-17,"Tskhinvali Region",0,89
+2020-08-18,"Abkhazia",5,207
+2020-08-18,"Tskhinvali Region",0,89
+2020-08-19,"Abkhazia",5,212
+2020-08-19,"Tskhinvali Region",0,89
+2020-08-20,"Abkhazia",3,215
+2020-08-20,"Tskhinvali Region",0,89
+2020-08-21,"Abkhazia",10,225
+2020-08-21,"Tskhinvali Region",0,89
+2020-08-22,"Abkhazia",9,234
+2020-08-22,"Tskhinvali Region",0,89
+2020-08-23,"Abkhazia",8,242
+2020-08-23,"Tskhinvali Region",0,89
+2020-08-24,"Abkhazia",5,247
+2020-08-24,"Tskhinvali Region",0,89
+2020-08-25,"Abkhazia",15,262
+2020-08-25,"Tskhinvali Region",0,89
+2020-08-26,"Abkhazia",12,274
+2020-08-26,"Tskhinvali Region",0,89
+2020-08-27,"Abkhazia",21,295
+2020-08-27,"Tskhinvali Region",0,89
+2020-08-28,"Abkhazia",13,308
+2020-08-28,"Tskhinvali Region",0,89
+2020-08-29,"Abkhazia",7,315
+2020-08-29,"Tskhinvali Region",0,89
+2020-08-30,"Abkhazia",0,315
+2020-08-30,"Tskhinvali Region",0,89
+2020-08-31,"Abkhazia",15,330
+2020-08-31,"Tskhinvali Region",0,89
+2020-09-01,"Abkhazia",29,359
+2020-09-01,"Tskhinvali Region",0,89
+2020-09-02,"Abkhazia",25,384
+2020-09-02,"Tskhinvali Region",0,89
+2020-09-03,"Abkhazia",42,426
+2020-09-03,"Tskhinvali Region",0,89
+2020-09-04,"Abkhazia",40,466
+2020-09-04,"Tskhinvali Region",0,89
+2020-09-05,"Abkhazia",36,502
+2020-09-05,"Tskhinvali Region",1,90
+2020-09-06,"Abkhazia",14,516
+2020-09-06,"Tskhinvali Region",0,90
+2020-09-07,"Abkhazia",0,516
+2020-09-07,"Tskhinvali Region",0,90
+2020-09-08,"Abkhazia",20,536
+2020-09-08,"Tskhinvali Region",0,90
+2020-09-09,"Abkhazia",21,557
+2020-09-09,"Tskhinvali Region",0,90
+2020-09-10,"Abkhazia",15,572
+2020-09-10,"Tskhinvali Region",0,90
+2020-09-11,"Abkhazia",38,610
+2020-09-11,"Tskhinvali Region",0,90
+2020-09-12,"Abkhazia",30,640
+2020-09-12,"Tskhinvali Region",0,90
+2020-09-13,"Abkhazia",16,656
+2020-09-13,"Tskhinvali Region",0,90
+2020-09-14,"Abkhazia",18,674
+2020-09-14,"Tskhinvali Region",0,90
+2020-09-15,"Abkhazia",52,726
+2020-09-15,"Tskhinvali Region",0,90
+2020-09-16,"Abkhazia",30,756
+2020-09-16,"Tskhinvali Region",0,90
+2020-09-17,"Abkhazia",26,782
+2020-09-17,"Tskhinvali Region",0,90
+2020-09-18,"Abkhazia",43,825
+2020-09-18,"Tskhinvali Region",0,90
+2020-09-19,"Abkhazia",53,878
+2020-09-19,"Tskhinvali Region",0,90
+2020-09-20,"Abkhazia",61,939
+2020-09-20,"Tskhinvali Region",1,91
+2020-09-21,"Abkhazia",56,995
+2020-09-21,"Tskhinvali Region",0,91
+2020-09-22,"Abkhazia",59,1054
+2020-09-22,"Tskhinvali Region",0,91
+2020-09-23,"Abkhazia",62,1116
+2020-09-23,"Tskhinvali Region",0,91
+2020-09-24,"Abkhazia",61,1177
+2020-09-24,"Tskhinvali Region",1,92
+2020-09-25,"Abkhazia",68,1245
+2020-09-25,"Tskhinvali Region",1,93
+2020-09-26,"Abkhazia",41,1286
+2020-09-26,"Tskhinvali Region",0,93
+2020-09-27,"Abkhazia",46,1332
+2020-09-27,"Tskhinvali Region",0,93
+2020-09-28,"Abkhazia",20,1352
+2020-09-28,"Tskhinvali Region",5,98
+2020-09-29,"Abkhazia",35,1387
+2020-09-29,"Tskhinvali Region",2,100
+2020-09-30,"Abkhazia",71,1458
+2020-09-30,"Tskhinvali Region",0,100
+2020-10-01,"Abkhazia",67,1525
+2020-10-01,"Tskhinvali Region",2,102
+2020-10-02,"Abkhazia",65,1590
+2020-10-02,"Tskhinvali Region",0,102
+2020-10-03,"Abkhazia",69,1659
+2020-10-03,"Tskhinvali Region",2,104
+2020-10-04,"Abkhazia",57,1716
+2020-10-04,"Tskhinvali Region",0,106
+2020-10-05,"Abkhazia",49,1765
+2020-10-05,"Tskhinvali Region",0,106
+2020-10-06,"Abkhazia",103,1868
+2020-10-06,"Tskhinvali Region",2,106
+2020-10-07,"Abkhazia",108,1976
+2020-10-07,"Tskhinvali Region",8,114
+2020-10-08,"Abkhazia",95,2071
+2020-10-08,"Tskhinvali Region",12,119
+2020-10-09,"Abkhazia",99,2170
+2020-10-09,"Tskhinvali Region",8,127
+2020-10-10,"Abkhazia",87,2257
+2020-10-10,"Tskhinvali Region",10,139
+2020-10-11,"Abkhazia",0,2257
+2020-10-11,"Tskhinvali Region",3,142
+2020-10-12,"Abkhazia",86,2343
+2020-10-12,"Tskhinvali Region",0,142
+2020-10-13,"Abkhazia",87,2430
+2020-10-13,"Tskhinvali Region",10,152
+2020-10-14,"Abkhazia",49,2479
+2020-10-14,"Tskhinvali Region",21,173
+2020-10-15,"Abkhazia",100,2579
+2020-10-15,"Tskhinvali Region",24,197
+2020-10-16,"Abkhazia",93,2672
+2020-10-16,"Tskhinvali Region",30,227
+2020-10-17,"Abkhazia",124,2796
+2020-10-17,"Tskhinvali Region",57,284
+2020-10-18,"Abkhazia",0,2796
+2020-10-18,"Tskhinvali Region",0,284
+2020-10-19,"Abkhazia",107,2903
+2020-10-19,"Tskhinvali Region",12,296
+2020-10-20,"Abkhazia",133,3036
+2020-10-20,"Tskhinvali Region",9,305
+2020-10-21,"Abkhazia",136,3172
+2020-10-21,"Tskhinvali Region",0,337
+2020-10-22,"Abkhazia",134,3306
+2020-10-22,"Tskhinvali Region",0,337
+2020-10-23,"Abkhazia",144,3450
+2020-10-23,"Tskhinvali Region",25,362
+2020-10-24,"Abkhazia",117,3567
+2020-10-24,"Tskhinvali Region",5,367
+2020-10-25,"Abkhazia",172,3739
+2020-10-25,"Tskhinvali Region",114,481
+2020-10-26,"Abkhazia",100,3839
+2020-10-26,"Tskhinvali Region",78,559
+2020-10-27,"Abkhazia",113,3952
+2020-10-27,"Tskhinvali Region",64,623
+2020-10-28,"Abkhazia",106,4058
+2020-10-28,"Tskhinvali Region",47,670
+2020-10-29,"Abkhazia",68,4126
+2020-10-29,"Tskhinvali Region",98,768
+2020-10-30,"Abkhazia",34,4160
+2020-10-30,"Tskhinvali Region",1,769
+2020-10-31,"Abkhazia",73,4233
+2020-10-31,"Tskhinvali Region",148,917
+2020-11-01,"Abkhazia",69,4302
+2020-11-01,"Tskhinvali Region",0,917
+2020-11-02,"Abkhazia",47,4349
+2020-11-02,"Tskhinvali Region",137,1054
+2020-11-03,"Abkhazia",77,4426
+2020-11-03,"Tskhinvali Region",0,1054
+2020-11-04,"Abkhazia",79,4505
+2020-11-04,"Tskhinvali Region",63,1117
+2020-11-05,"Abkhazia",76,4581
+2020-11-05,"Tskhinvali Region",68,1185
+2020-11-06,"Abkhazia",68,4649
+2020-11-06,"Tskhinvali Region",61,1270
+2020-11-07,"Abkhazia",71,4720
+2020-11-07,"Tskhinvali Region",41,1311
+2020-11-08,"Abkhazia",0,4720
+2020-11-08,"Tskhinvali Region",2,1313
+2020-11-09,"Abkhazia",52,4772
+2020-11-09,"Tskhinvali Region",61,1374
+2020-11-10,"Abkhazia",59,4831
+2020-11-10,"Tskhinvali Region",77,1451
+2020-11-11,"Abkhazia",67,4898
+2020-11-11,"Tskhinvali Region",44,1495
+2020-11-12,"Abkhazia",53,4951
+2020-11-12,"Tskhinvali Region",55,1550
+2020-11-13,"Abkhazia",73,5024
+2020-11-13,"Tskhinvali Region",57,1607
+2020-11-14,"Abkhazia",41,5065
+2020-11-14,"Tskhinvali Region",30,1637
+2020-11-15,"Abkhazia",0,5065
+2020-11-15,"Tskhinvali Region",35,1672
+2020-11-16,"Abkhazia",34,5099
+2020-11-16,"Tskhinvali Region",0,1672
+2020-11-17,"Abkhazia",75,5174
+2020-11-17,"Tskhinvali Region",36,1702
+2020-11-18,"Abkhazia",39,5213
+2020-11-18,"Tskhinvali Region",13,1715
+2020-11-19,"Abkhazia",65,5278
+2020-11-19,"Tskhinvali Region",25,1740
+2020-11-20,"Abkhazia",34,5312
+2020-11-20,"Tskhinvali Region",0,1740
+2020-11-21,"Abkhazia",68,5380
+2020-11-21,"Tskhinvali Region",12,1752
+2020-11-22,"Abkhazia",0,5380
+2020-11-22,"Tskhinvali Region",22,1774
+2020-11-23,"Abkhazia",62,5442
+2020-11-23,"Tskhinvali Region",0,1774
+2020-11-24,"Abkhazia",116,5558
+2020-11-24,"Tskhinvali Region",18,1792
+2020-11-25,"Abkhazia",90,5648
+2020-11-25,"Tskhinvali Region",0,1792
+2020-11-26,"Abkhazia",84,5732
+2020-11-26,"Tskhinvali Region",5,1797
+2020-11-27,"Abkhazia",66,5798
+2020-11-27,"Tskhinvali Region",18,1815
+2020-11-28,"Abkhazia",85,5883
+2020-11-28,"Tskhinvali Region",23,1838
+2020-11-29,"Abkhazia",0,5883
+2020-11-29,"Tskhinvali Region",0,1838
+2020-11-30,"Abkhazia",87,5970
+2020-11-30,"Tskhinvali Region",39,1877
+2020-12-01,"Abkhazia",122,6092
+2020-12-01,"Tskhinvali Region",0,1877
+2020-12-02,"Abkhazia",112,6204
+2020-12-02,"Tskhinvali Region",24,1901
+2020-12-03,"Abkhazia",109,6313
+2020-12-03,"Tskhinvali Region",35,1936
+2020-12-04,"Abkhazia",87,6400
+2020-12-04,"Tskhinvali Region",24,1960
+2020-12-05,"Abkhazia",111,6511
+2020-12-05,"Tskhinvali Region",34,1994
+2020-12-06,"Abkhazia",0,6511
+2020-12-06,"Tskhinvali Region",0,1994
+2020-12-07,"Abkhazia",108,6619
+2020-12-07,"Tskhinvali Region",0,1994
+2020-12-08,"Abkhazia",98,6717
+2020-12-08,"Tskhinvali Region",19,2013
+2020-12-09,"Abkhazia",98,6815
+2020-12-09,"Tskhinvali Region",39,2052
+2020-12-10,"Abkhazia",109,6924
+2020-12-10,"Tskhinvali Region",23,2075
+2020-12-11,"Abkhazia",119,7043
+2020-12-11,"Tskhinvali Region",16,2091
+2020-12-12,"Abkhazia",93,7136
+2020-12-12,"Tskhinvali Region",0,2091
+2020-12-13,"Abkhazia",0,7136
+2020-12-13,"Tskhinvali Region",0,2091
+2020-12-14,"Abkhazia",133,7269
+2020-12-14,"Tskhinvali Region",24,2115
+2020-12-15,"Abkhazia",140,7409
+2020-12-15,"Tskhinvali Region",0,2115
+2020-12-16,"Abkhazia",95,7504
+2020-12-16,"Tskhinvali Region",46,2161
+2020-12-17,"Abkhazia",98,7602
+2020-12-17,"Tskhinvali Region",19,2180
+2020-12-18,"Abkhazia",102,7704
+2020-12-18,"Tskhinvali Region",26,2206
+2020-12-19,"Abkhazia",75,7779
+2020-12-19,"Tskhinvali Region",0,2206
+2020-12-20,"Abkhazia",0,7779
+2020-12-20,"Tskhinvali Region",0,2206
+2020-12-21,"Abkhazia",92,7871
+2020-12-21,"Tskhinvali Region",35,2241
+2020-12-22,"Abkhazia",140,8011
+2020-12-22,"Tskhinvali Region",0,2241
+2020-12-23,"Abkhazia",124,8135
+2020-12-23,"Tskhinvali Region",21,2262
+2020-12-24,"Abkhazia",101,8236
+2020-12-24,"Tskhinvali Region",34,2296
+2020-12-25,"Abkhazia",114,8350
+2020-12-25,"Tskhinvali Region",13,2309
+2020-12-26,"Abkhazia",109,8459
+2020-12-26,"Tskhinvali Region",0,2309
+2020-12-27,"Abkhazia",0,8459
+2020-12-27,"Tskhinvali Region",0,2309
+2020-12-28,"Abkhazia",104,8563
+2020-12-28,"Tskhinvali Region",43,2352
+2020-12-29,"Abkhazia",112,8675
+2020-12-29,"Tskhinvali Region",18,2370
+2020-12-30,"Abkhazia",150,8825
+2020-12-30,"Tskhinvali Region",20,2390
+2020-12-31,"Abkhazia",95,8920
+2020-12-31,"Tskhinvali Region",19,2409
+2021-01-01,"Abkhazia",1,8921
+2021-01-01,"Tskhinvali Region",0,2409
+2021-01-02,"Abkhazia",0,8921
+2021-01-02,"Tskhinvali Region",0,2409
+2021-01-03,"Abkhazia",129,9050
+2021-01-03,"Tskhinvali Region",0,2409
+2021-01-04,"Abkhazia",133,9183
+2021-01-04,"Tskhinvali Region",0,2409
+2021-01-05,"Abkhazia",141,9324
+2021-01-05,"Tskhinvali Region",0,2409
+2021-01-06,"Abkhazia",141,9465
+2021-01-06,"Tskhinvali Region",0,2409
+2021-01-07,"Abkhazia",0,9465
+2021-01-07,"Tskhinvali Region",0,2409
+2021-01-08,"Abkhazia",148,9613
+2021-01-08,"Tskhinvali Region",56,2465
+2021-01-09,"Abkhazia",169,9782
+2021-01-09,"Tskhinvali Region",0,2462
+2021-01-10,"Abkhazia",0,9782
+2021-01-10,"Tskhinvali Region",0,2462
+2021-01-11,"Abkhazia",179,9961
+2021-01-11,"Tskhinvali Region",0,2462
+2021-01-12,"Abkhazia",141,10102
+2021-01-12,"Tskhinvali Region",49,2511
+2021-01-13,"Abkhazia",149,10251
+2021-01-13,"Tskhinvali Region",37,2548
+2021-01-14,"Abkhazia",0,10251
+2021-01-14,"Tskhinvali Region",33,2581
+2021-01-15,"Abkhazia",127,10378
+2021-01-15,"Tskhinvali Region",51,2632
+2021-01-16,"Abkhazia",108,10486
+2021-01-16,"Tskhinvali Region",0,2705
+2021-01-17,"Abkhazia",0,10486
+2021-01-17,"Tskhinvali Region",0,2705
+2021-01-18,"Abkhazia",122,10608
+2021-01-18,"Tskhinvali Region",0,2705
+2021-01-19,"Abkhazia",176,10784
+2021-01-19,"Tskhinvali Region",0,2705
+2021-01-20,"Abkhazia",91,10875
+2021-01-20,"Tskhinvali Region",37,2742
+2021-01-21,"Abkhazia",109,10984
+2021-01-21,"Tskhinvali Region",20,2762
+2021-01-22,"Abkhazia",112,11096
+2021-01-22,"Tskhinvali Region",33,2795
+2021-01-23,"Abkhazia",62,11158
+2021-01-23,"Tskhinvali Region",0,2795
+2021-01-24,"Abkhazia",0,11158
+2021-01-24,"Tskhinvali Region",0,2795
+2021-01-25,"Abkhazia",58,11216
+2021-01-25,"Tskhinvali Region",0,2795
+2021-01-26,"Abkhazia",85,11301
+2021-01-26,"Tskhinvali Region",41,2836
+2021-01-27,"Abkhazia",54,11355
+2021-01-27,"Tskhinvali Region",9,2845
+2021-01-28,"Abkhazia",56,11411
+2021-01-28,"Tskhinvali Region",11,2856
+2021-01-29,"Abkhazia",58,11469
+2021-01-29,"Tskhinvali Region",13,2869
+2021-01-30,"Abkhazia",51,11520
+2021-01-30,"Tskhinvali Region",0,2869
+2021-01-31,"Abkhazia",0,11520
+2021-01-31,"Tskhinvali Region",0,2869
+2021-02-01,"Abkhazia",44,11564
+2021-02-01,"Tskhinvali Region",21,2890
+2021-02-02,"Abkhazia",56,11620
+2021-02-02,"Tskhinvali Region",21,2911
+2021-02-03,"Abkhazia",64,11684
+2021-02-03,"Tskhinvali Region",13,2924
+2021-02-04,"Abkhazia",54,11738
+2021-02-04,"Tskhinvali Region",12,2936
+2021-02-05,"Abkhazia",23,11761
+2021-02-05,"Tskhinvali Region",25,2961
+2021-02-06,"Abkhazia",39,11800
+2021-02-06,"Tskhinvali Region",0,2961
+2021-02-07,"Abkhazia",0,11800
+2021-02-07,"Tskhinvali Region",27,2988
+2021-02-08,"Abkhazia",18,11818
+2021-02-08,"Tskhinvali Region",0,2988
+2021-02-09,"Abkhazia",51,11869
+2021-02-09,"Tskhinvali Region",3,2991
+2021-02-10,"Abkhazia",64,11933
+2021-02-10,"Tskhinvali Region",16,3007
+2021-02-11,"Abkhazia",55,11988
+2021-02-11,"Tskhinvali Region",15,3022
+2021-02-12,"Abkhazia",37,12025
+2021-02-12,"Tskhinvali Region",10,3032
+2021-02-13,"Abkhazia",34,12059
+2021-02-13,"Tskhinvali Region",0,3032
+2021-02-14,"Abkhazia",0,12059
+2021-02-14,"Tskhinvali Region",0,3032
+2021-02-15,"Abkhazia",47,12106
+2021-02-15,"Tskhinvali Region",21,3053
+2021-02-16,"Abkhazia",39,12145
+2021-02-16,"Tskhinvali Region",12,3065
+2021-02-17,"Abkhazia",24,12618
+2021-02-17,"Tskhinvali Region",9,3074
+2021-02-18,"Abkhazia",32,12650
+2021-02-18,"Tskhinvali Region",10,3084
+2021-02-19,"Abkhazia",21,12671
+2021-02-19,"Tskhinvali Region",7,3091
+2021-02-20,"Abkhazia",9,12680
+2021-02-20,"Tskhinvali Region",7,3098
+2021-02-21,"Abkhazia",0,12680
+2021-02-21,"Tskhinvali Region",0,3098
+2021-02-22,"Abkhazia",20,12700
+2021-02-22,"Tskhinvali Region",0,3098
+2021-02-23,"Abkhazia",25,12725
+2021-02-23,"Tskhinvali Region",0,3098
+2021-02-24,"Abkhazia",20,12745
+2021-02-24,"Tskhinvali Region",17,3115
+2021-02-25,"Abkhazia",32,12777
+2021-02-25,"Tskhinvali Region",1,3116
+2021-02-26,"Tskhinvali Region",7,3123
+2021-02-26,"Abkhazia",11,12778
+2021-02-27,"Abkhazia",26,12814
+2021-02-28,"Tskhinvali Region",0,3123
+2021-02-28,"Abkhazia",0,12814

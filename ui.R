@@ -12,6 +12,7 @@ library(httr)
 library(rvest)
 library(shinyBS)
 library(readxl)
+library(ggrepel)
 
 # library(cronR)
 options(shiny.sanitize.errors = FALSE)
@@ -50,8 +51,8 @@ ui <- fluidPage(
                tabName = "hospitalization"),
       menuItem(h5(i18n$t("სხვა ინდიკატორები"), style="font-size: '4px'; font-family: 'BPG_upper'; text-transform: uppercase;"),
                tabName = "other_indicators"),
-      # menuItem(h5(i18n$t("შედარება"), style="font-size: '4px'; font-family: 'BPG_upper'; text-transform: uppercase;"),
-      #          tabName = "comparison"),
+      menuItem(h5(i18n$t("შედარება"), style="font-size: '4px'; font-family: 'BPG_upper'; text-transform: uppercase;"),
+               tabName = "comparison"),
       menuItem(h5(i18n$t("მონაცემების წყარო"), style="font-size: '4px'; font-family: 'BPG_upper'; text-transform: uppercase;"),
                tabName = "data_source")
     )
@@ -124,7 +125,7 @@ ui <- fluidPage(
   ),
 
 tags$head(
-  # tags$link(rel="shortcut icon", href="favicon.png"),
+  # tags$link(rel="shortcut icon", href="img/favicon.png"),
   tags$link(rel = "stylesheet", type = "text/css", href = "custom.css"),
   tags$style(HTML(
     '.tabbable > .nav > li > a                  {color:black; font-family: "BPG_upper"}'
@@ -258,10 +259,21 @@ tabItem(
     )
   )
 ),
-# tabItem(
-#   tabName = "comparison",
-#   fluidRow()
-# ),
+tabItem(
+  tabName = "comparison",
+  fluidRow(
+    sidebarPanel(
+      uiOutput('countries'),
+      uiOutput('variable'),
+      uiOutput('date')
+    ),
+    mainPanel(
+      tabsetPanel(
+        box(h6("პლოტი"), width="110%",
+            plotOutput(outputId="plot") # should be a girafe
+            #tableOutput(outputId = "plot")
+        ))))
+),
 tabItem(tabName = "data_source",
         fluidRow(
         # includeMarkdown("www/methods.Rmd")
